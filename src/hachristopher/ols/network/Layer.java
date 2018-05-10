@@ -17,6 +17,7 @@ public class Layer {
 		super();
 		this.numNeurons = numNeurons;
 		this.actFunc = actFunc;
+		this.inputSize = inputSize;
 
 		initalize();
 	}
@@ -35,8 +36,8 @@ public class Layer {
 	 * Initalize weights with random values
 	 */
 	private void randomizeWeights() {
-		for (int i = 0; i < weights.length; i++) {
-			for (int j = 0; j < weights[0].length; j++) {
+		for (int i = 0; i < this.inputSize; i++) {
+			for (int j = 0; j < this.numNeurons; j++) {
 				this.weights[i][j] = MathUtils.randomBetween(-1, 1);
 			}
 		}
@@ -57,5 +58,24 @@ public class Layer {
 		}
 
 		return this.outputs;
+	}
+
+	public double[] getInputs() {
+		return inputs;
+	}
+
+	public double[] getOutputs() {
+		return outputs;
+	}
+
+	public void setInputs(double[] inputs) {
+		this.inputs = inputs;
+	}
+
+	public void setOutputs(double[] outputs) {
+		this.outputs = outputs;
 	};
+	
+	
+	
 }

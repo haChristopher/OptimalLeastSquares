@@ -1,6 +1,7 @@
 package hachristopher.ols.network;
 
 import java.util.ArrayList;
+import java.util.ListIterator;
 
 public class Ols {
 
@@ -9,7 +10,8 @@ public class Ols {
 	
 	ArrayList<Layer> layers = new ArrayList<Layer>();
 	
-	public double[] inData;
+	public double[] inData = {1,2,3,4,5,6,7,8,9,10};
+	public double[] results;
 	
 	
 
@@ -44,10 +46,25 @@ public class Ols {
 	}
 
 	/**
+	 * Foreward activate all layers and save the results
 	 * 
 	 */
 	public void activateForeward() {
 		
+		ListIterator<Layer> iterator = layers.listIterator();
+	    
+	    Layer layer = iterator.next();
+	    layer.setInputs(inData);
+	    layer.activate();
+	    
+	    while(iterator.hasNext()){
+	    		layer = iterator.next();
+	    		int prevIndex = iterator.previousIndex();
+	    		layer.setInputs(layers.get(prevIndex).getOutputs());
+	    		layer.activate();
+	    }	
+	    
+	    System.out.println(layer.getOutputs().length);
 	}
 
 	/**

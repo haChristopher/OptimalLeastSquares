@@ -42,14 +42,18 @@ public class Main {
 		
 		//--------------------Network-Test------------------------------
 		
+		int inputSize = 10;
+		int resultSize = 1;
+		
 		Ols net = new Ols(1, 20);
 		
-		net.addLayer(10, 200, Activation.LEAKYRELU);
+		net.addLayer(inputSize, 200, Activation.LEAKYRELU);
 		net.addLayer(200, 200, Activation.LEAKYRELU);
 		net.addLayer(200, 200, Activation.LEAKYRELU);
 		net.addLayer(200, 200, Activation.LEAKYRELU);
-		net.addLayer(200, 1, Activation.LEAKYRELU);
+		net.addLayer(200, resultSize, Activation.LEAKYRELU);
 		
+		net.activateForeward();
 	}
 	
 
