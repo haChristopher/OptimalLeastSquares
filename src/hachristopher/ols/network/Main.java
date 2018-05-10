@@ -7,6 +7,8 @@ public class Main {
 
 	public static void main(String[] args) {
 		
+		
+		//--------------------Residuum-Test-------------------------------
 		int size = 100;
 		double [] inVector;
 		ConjugateGradient cg = new ConjugateGradient(size);
@@ -37,6 +39,11 @@ public class Main {
 		System.out.println("Error: " + error);
 
 		System.out.println("Done!");
+		
+		//--------------------Network-Test------------------------------
+		
+		Ols net = new Ols(1, 20, Activation.LEAKYRELU);
+		
 	}
 	
 

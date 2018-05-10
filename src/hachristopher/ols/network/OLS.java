@@ -1,19 +1,27 @@
 package hachristopher.ols.network;
 
-public class OLS {
+public class Ols {
 
-	double[] inData;
 	Activation actFunc;
+	public int numNeurons;
+	public int numLayers;
+
+	public double[] inData;
+	
+	
+
 
 	/**
 	 * 
-	 * @param numLayers 
+	 * @param numLayers (hidden layers)
 	 * @param numNeurons
 	 * @param actFunc
 	 */
-	public OLS(int numLayers, int numNeurons, Activation actFunc) {
+	public Ols(int numLayers, int numNeurons, Activation actFunc) {
 		super();
 		this.actFunc = actFunc;
+		this.numNeurons = numNeurons;
+		this.numLayers = numLayers;
 	}
 
 	/**
