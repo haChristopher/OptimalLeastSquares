@@ -42,7 +42,13 @@ public class Main {
 		
 		//--------------------Network-Test------------------------------
 		
-		Ols net = new Ols(1, 20, Activation.LEAKYRELU);
+		Ols net = new Ols(1, 20);
+		
+		net.addLayer(10, 200, Activation.LEAKYRELU);
+		net.addLayer(200, 200, Activation.LEAKYRELU);
+		net.addLayer(200, 200, Activation.LEAKYRELU);
+		net.addLayer(200, 200, Activation.LEAKYRELU);
+		net.addLayer(200, 1, Activation.LEAKYRELU);
 		
 	}
 	
