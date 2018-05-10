@@ -88,6 +88,8 @@ public class ConjugateGradient {
 
 	public void initOptimization() {	
 		
+		System.out.println(A[0][1] + " und " + A[1][0]);
+		
 		calculateResiduum();
 
 		// start first step in the direction of the residuum
