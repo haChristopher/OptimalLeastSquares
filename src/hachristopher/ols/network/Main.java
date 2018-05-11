@@ -42,10 +42,15 @@ public class Main {
 		
 		//--------------------Network-Test------------------------------
 		
-		int inputSize = 10;
-		int resultSize = 1;
 		
-		Ols net = new Ols(1, 20);
+		double [] inData = new double[10];
+		double [] outData = new double[10];
+		
+		
+		int inputSize = inData.length;
+		int resultSize = outData.length;
+		
+		Ols net = new Ols();
 		
 		net.addLayer(inputSize, 200, Activation.LEAKYRELU);
 		net.addLayer(200, 200, Activation.LEAKYRELU);

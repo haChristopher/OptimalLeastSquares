@@ -21,18 +21,10 @@ public class Ols {
 	 * @param numLayers (hidden layers)
 	 * @param numNeurons
 	 */
-	public Ols(int numLayers, int numNeurons) {
+	public Ols() {
 		super();
-		this.numNeurons = numNeurons;
-		this.numLayers = numLayers;
-		initalize();
 	}
 
-	/**
-	 * Initalize all arrays and weights with random values and
-	 */
-	private void initalize() {
-	}
 	
 	/**
 	 * Adds a Layer to the network
@@ -71,7 +63,6 @@ public class Ols {
 	 * Starts the training of the network
 	 */
 	public void start() {
-		initalize();
 	}
 
 }
