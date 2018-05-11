@@ -43,22 +43,27 @@ public class Main {
 		//--------------------Network-Test------------------------------
 		
 		
-		double [] inData = new double[10];
-		double [] outData = new double[10];
+		double inData[][] = {{0.01, 0.01}, {1.0, 0.01}, {0.01, 1.0}, {1.0, 1.0}};
+		double outData[] = {-0.99, 0.99, 0.99, -0.99};
 		
 		
 		int inputSize = inData.length;
-		int resultSize = outData.length;
 		
-		Ols net = new Ols();
+		Ols net = new Ols(inData, outData);
 		
-		net.addLayer(inputSize, 200, Activation.LEAKYRELU);
-		net.addLayer(200, 200, Activation.LEAKYRELU);
-		net.addLayer(200, 200, Activation.LEAKYRELU);
-		net.addLayer(200, 200, Activation.LEAKYRELU);
-		net.addLayer(200, resultSize, Activation.LEAKYRELU);
+		net.addLayer(inputSize, 10, Activation.LEAKYRELU);
+		net.addLayer(10, 10, Activation.LEAKYRELU);
+		net.addLayer(10, 10, Activation.LEAKYRELU);
+		net.addLayer(10, 10, Activation.LEAKYRELU);
+		net.addLayer(10, 1, Activation.LEAKYRELU);
 		
-		net.activateForeward();
+		net.train();
+		
+		double [] results = net.getResults();
+		
+		for (int i = 0; i < results.length; i++) {
+			System.out.print(results[i] + " ");
+		}
 	}
 	
 

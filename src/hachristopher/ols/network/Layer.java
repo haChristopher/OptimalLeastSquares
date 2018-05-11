@@ -31,7 +31,7 @@ public class Layer {
 		this.weights = new double[this.inputSize][this.numNeurons];
 		randomizeWeights();
 	}
-	
+
 	/**
 	 * Initalize weights with random values
 	 */
@@ -45,10 +45,9 @@ public class Layer {
 
 	/**
 	 * Foreward activation of the layer
-	 * @return the outputs of the layer
 	 */
 	public void activate() {
-		
+
 		for (int toNeuron = 0; toNeuron < outputs.length; toNeuron++) {
 			double sum = 0;
 			for (int fromNeuron = 0; fromNeuron < inputs.length; fromNeuron++) {
@@ -73,7 +72,5 @@ public class Layer {
 	public void setOutputs(double[] outputs) {
 		this.outputs = outputs;
 	};
-	
-	
-	
+
 }

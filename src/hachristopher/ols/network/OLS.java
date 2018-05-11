@@ -7,25 +7,33 @@ public class Ols {
 
 	public int numNeurons;
 	public int numLayers;
-	
-	ArrayList<Layer> layers = new ArrayList<Layer>();
-	
-	public double[] inData = {1,2,3,4,5,6,7,8,9,10};
-	public double[] results;
-	
-	
 
+	ArrayList<Layer> layers = new ArrayList<Layer>();
+
+	private double[][] inData;
+	private double[] outData;
+	private double[] results;
 
 	/**
 	 * 
-	 * @param numLayers (hidden layers)
+	 * @param numLayers
+	 *            (hidden layers)
 	 * @param numNeurons
 	 */
-	public Ols() {
+	public Ols(double[][] inData, double[] outData) {
 		super();
+		this.inData = inData;
+		this.outData = outData;
+		initalize();
 	}
 
-	
+	/**
+	 * Initalize arrays
+	 */
+	private void initalize() {
+		this.results = new double[outData.length];
+	}
+
 	/**
 	 * Adds a Layer to the network
 	 * 
@@ -38,31 +46,39 @@ public class Ols {
 	}
 
 	/**
-	 * Foreward activate all layers and save the results
+	 * Foreward activate all layers
 	 * 
+	 * @return the output of the last layer
 	 */
-	public void activateForeward() {
-		
+	private double activateForeward(double[] data) {
+
 		ListIterator<Layer> iterator = layers.listIterator();
-	    
-	    Layer layer = iterator.next();
-	    layer.setInputs(inData);
-	    layer.activate();
-	    
-	    while(iterator.hasNext()){
-	    		layer = iterator.next();
-	    		int prevIndex = iterator.previousIndex();
-	    		layer.setInputs(layers.get(prevIndex).getOutputs());
-	    		layer.activate();
-	    }	
-	    
-	    System.out.println(layer.getOutputs().length);
+
+		Layer layer = iterator.next();
+		layer.setInputs(data);
+		layer.activate();
+
+		while (iterator.hasNext()) {
+			int prevIndex = iterator.previousIndex();
+			layer = iterator.next();
+			layer.setInputs(layers.get(prevIndex).getOutputs());
+			layer.activate();
+		}
+
+		return layer.outputs[0];
 	}
 
 	/**
 	 * Starts the training of the network
 	 */
-	public void start() {
+	public void train() {
+		for (int data = 0; data < inData.length; data++) {
+			results[data] = activateForeward(inData[data]);
+		}
+	}
+
+	public double[] getResults() {
+		return results;
 	}
 
 }
