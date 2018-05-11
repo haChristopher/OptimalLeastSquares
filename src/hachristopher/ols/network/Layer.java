@@ -47,7 +47,7 @@ public class Layer {
 	 * Foreward activation of the layer
 	 * @return the outputs of the layer
 	 */
-	public double[] activate() {
+	public void activate() {
 		
 		for (int toNeuron = 0; toNeuron < outputs.length; toNeuron++) {
 			double sum = 0;
@@ -56,8 +56,6 @@ public class Layer {
 			}
 			this.outputs[toNeuron] = this.actFunc.activate(sum);
 		}
-
-		return this.outputs;
 	}
 
 	public double[] getInputs() {
