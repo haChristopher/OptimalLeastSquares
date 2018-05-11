@@ -48,13 +48,14 @@ public class Main {
 		
 		
 		int inputSize = inData.length;
+		boolean bias = true;
 		
 		Ols net = new Ols(inData, outData);
 		
 		net.addLayer(inputSize, 10, Activation.LEAKYRELU);
-		net.addLayer(10, 10, Activation.LEAKYRELU);
-		net.addLayer(10, 10, Activation.LEAKYRELU);
-		net.addLayer(10, 10, Activation.LEAKYRELU);
+		net.addLayer(10, 10, Activation.LEAKYRELU, bias);
+		net.addLayer(10, 10, Activation.LEAKYRELU, bias);
+		net.addLayer(10, 10, Activation.LEAKYRELU, bias);
 		net.addLayer(10, 1, Activation.LEAKYRELU);
 		
 		net.train();

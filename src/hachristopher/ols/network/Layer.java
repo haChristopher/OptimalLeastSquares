@@ -6,6 +6,7 @@ public class Layer {
 
 	public int numNeurons;
 	public int inputSize;
+	public boolean hasBias;
 	public Activation actFunc;
 
 	public double weights[][];
@@ -13,12 +14,18 @@ public class Layer {
 	public double inputs[];
 	public double outputs[];
 
-	public Layer(int inputSize, int numNeurons, Activation actFunc) {
+	
+	public Layer (int inputSize, int numNeurons, Activation actFunc, boolean hasBias) {
 		super();
 		this.numNeurons = numNeurons;
 		this.actFunc = actFunc;
 		this.inputSize = inputSize;
-
+		this.hasBias = hasBias;
+		
+		if (hasBias) {
+			this.inputSize +=1;
+		}
+		
 		initalize();
 	}
 
@@ -30,6 +37,16 @@ public class Layer {
 		this.outputs = new double[this.numNeurons];
 		this.weights = new double[this.inputSize][this.numNeurons];
 		randomizeWeights();
+		if(hasBias) {
+			resetBias();
+		}
+	}
+	
+	/**
+	 * Reset the bias weights to 1
+	 */
+	private void resetBias() {
+		this.inputs[this.inputSize-1] = 1;
 	}
 
 	/**
@@ -65,8 +82,10 @@ public class Layer {
 		return outputs;
 	}
 
-	public void setInputs(double[] inputs) {
-		this.inputs = inputs;
+	public void setInputs(double[] newInputs) {
+		for (int i = 0; i < newInputs.length; i++) {
+			this.inputs[i] = newInputs[i];
+		}
 	}
 
 	public void setOutputs(double[] outputs) {

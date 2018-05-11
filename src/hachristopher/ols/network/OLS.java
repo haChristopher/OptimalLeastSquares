@@ -42,7 +42,21 @@ public class Ols {
 	 * @param actfunc
 	 */
 	public void addLayer(int inputSize, int numNeurons, Activation actfunc) {
-		layers.add(new Layer(inputSize, numNeurons, actfunc));
+		addLayer(inputSize, numNeurons, actfunc, false);
+	}
+	
+	
+	/**
+	 * Adds a Layer with bias to the network
+	 * 
+	 * @param inputSize
+	 * @param numNeurons
+	 * @param actfunc
+	 * @param bias
+	 * 
+	 */
+	public void addLayer(int inputSize, int numNeurons, Activation actfunc, boolean hasBias) {
+		layers.add(new Layer(inputSize, numNeurons, actfunc, hasBias));
 	}
 
 	/**
@@ -50,7 +64,7 @@ public class Ols {
 	 * 
 	 * @return the output of the last layer
 	 */
-	private double activateForeward(double[] data) {
+	public double activateForeward(double[] data) {
 
 		ListIterator<Layer> iterator = layers.listIterator();
 
@@ -69,12 +83,22 @@ public class Ols {
 	}
 
 	/**
-	 * Starts the training of the network
+	 * Activates all data points through the network and saves the results
 	 */
-	public void train() {
+	private void activateAllData() {
+
 		for (int data = 0; data < inData.length; data++) {
 			results[data] = activateForeward(inData[data]);
 		}
+
+	}
+
+	/**
+	 * Starts the training of the network
+	 */
+	public void train() {
+		activateAllData();
+		
 	}
 
 	public double[] getResults() {
