@@ -11,16 +11,15 @@ public class Ols {
 	ArrayList<Layer> layers = new ArrayList<Layer>();
 
 	private double[][] inData;
-	private double[] outData;
-	private double[] results;
+	private double[][] outData;
+	private double[][] results;
 
 	/**
 	 * 
-	 * @param numLayers
-	 *            (hidden layers)
+	 * @param numLayers hidden layers
 	 * @param numNeurons
 	 */
-	public Ols(double[][] inData, double[] outData) {
+	public Ols(double[][] inData, double[][] outData) {
 		super();
 		this.inData = inData;
 		this.outData = outData;
@@ -31,7 +30,7 @@ public class Ols {
 	 * Initalize arrays
 	 */
 	private void initalize() {
-		this.results = new double[outData.length];
+		this.results = new double[outData.length][outData[0].length];
 	}
 
 	/**
@@ -44,8 +43,7 @@ public class Ols {
 	public void addLayer(int inputSize, int numNeurons, Activation actfunc) {
 		addLayer(inputSize, numNeurons, actfunc, false);
 	}
-	
-	
+
 	/**
 	 * Adds a Layer with bias to the network
 	 * 
@@ -64,7 +62,7 @@ public class Ols {
 	 * 
 	 * @return the output of the last layer
 	 */
-	public double activateForeward(double[] data) {
+	public double[] activateForeward(double[] data) {
 
 		ListIterator<Layer> iterator = layers.listIterator();
 
@@ -79,7 +77,7 @@ public class Ols {
 			layer.activate();
 		}
 
-		return layer.outputs[0];
+		return layer.outputs;
 	}
 
 	/**
@@ -98,10 +96,10 @@ public class Ols {
 	 */
 	public void train() {
 		activateAllData();
-		
+
 	}
 
-	public double[] getResults() {
+	public double[][] getResults() {
 		return results;
 	}
 

@@ -46,11 +46,16 @@ public class Main {
 		double inData[][] = {{0.01, 0.01}, {1.0, 0.01}, {0.01, 1.0}, {1.0, 1.0}};
 		double outData[] = {-0.99, 0.99, 0.99, -0.99};
 		
+		double[][] transformed = new double[outData.length][1];
+		for (int i = 0; i < outData.length; i++) {
+			transformed[i][0] =  outData[i];
+		}
+		
 		
 		int inputSize = inData.length;
 		boolean bias = true;
 		
-		Ols net = new Ols(inData, outData);
+		Ols net = new Ols(inData, transformed);
 		
 		net.addLayer(inputSize, 10, Activation.LEAKYRELU);
 		net.addLayer(10, 10, Activation.LEAKYRELU, bias);
@@ -60,10 +65,13 @@ public class Main {
 		
 		net.train();
 		
-		double [] results = net.getResults();
+		double [][] results = net.getResults();
 		
 		for (int i = 0; i < results.length; i++) {
-			System.out.print(results[i] + " ");
+			for (int j = 0; j < 1; j++) {
+				System.out.print(results[i][j] + ", ");
+			}
+			System.out.println();
 		}
 	}
 	
