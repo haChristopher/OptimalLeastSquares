@@ -67,9 +67,11 @@ public class Main {
 		
 		double [][] results = net.getResults();
 		
+		
+		//TODO Alle Ausgabewerte sind gleich
 		for (int i = 0; i < results.length; i++) {
 			for (int j = 0; j < 1; j++) {
-				System.out.print(results[i][j] + ", ");
+				System.out.print(results[i][j] + " ");
 			}
 			System.out.println();
 		}
