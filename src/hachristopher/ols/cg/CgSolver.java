@@ -1,6 +1,6 @@
 package hachristopher.ols.cg;
 
-public class ConjugateGradient {
+public class CgSolver {
 
 	// size of the matricies
 	int size;
@@ -18,7 +18,7 @@ public class ConjugateGradient {
 
 	boolean haschanged;
 
-	public ConjugateGradient(int size) {
+	public CgSolver(int size) {
 		super();
 		this.size = size;
 		this.A = new double[this.size][this.size];

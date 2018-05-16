@@ -10,6 +10,5 @@ public class MathUtils {
 	public static double randomBetween (double min, double max) {
 		return (double) (Math.random() * (max - min)) + min;
 	}
-	
 
 }

@@ -16,7 +16,8 @@ public class Ols {
 
 	/**
 	 * 
-	 * @param numLayers hidden layers
+	 * @param numLayers
+	 *            hidden layers
 	 * @param numNeurons
 	 */
 	public Ols(double[][] inData, double[][] outData) {
@@ -76,7 +77,7 @@ public class Ols {
 			layer.setInputs(layers.get(prevIndex).getOutputs());
 			layer.activate();
 		}
-		
+
 		return layer.outputs;
 	}
 
@@ -84,19 +85,17 @@ public class Ols {
 	 * Activates all data points through the network and saves the results
 	 */
 	private void activateAllData() {
-		
-		//TODO improve result array
+
+		// TODO improve result array
 		for (int data = 0; data < inData.length; data++) {
-			double [] result = activateForeward(inData[data]);
+			double[] result = activateForeward(inData[data]);
 			for (int i = 0; i < result.length; i++) {
-				System.out.println(this.results[data].length);
 				this.results[data][i] = result[i];
 			}
 		}
 
 	}
-	
-	
+
 	/**
 	 * Starts the training of the network
 	 */

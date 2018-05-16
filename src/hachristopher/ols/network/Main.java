@@ -1,6 +1,6 @@
 package hachristopher.ols.network;
 
-import hachristopher.ols.cg.ConjugateGradient;
+import hachristopher.ols.cg.CgSolver;
 import hachristopher.ols.network.utils.MathUtils;
 
 public class Main {
@@ -11,7 +11,7 @@ public class Main {
 		//--------------------Residuum-Test-------------------------------
 		int size = 100;
 		double [] inVector;
-		ConjugateGradient cg = new ConjugateGradient(size);
+		CgSolver cg = new CgSolver(size);
 	
 		// Initalize test matrix
 		for (int i = 0; i < size; i++) {

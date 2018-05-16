@@ -1,5 +1,6 @@
 package hachristopher.ols.network;
 
+import hachristopher.ols.cg.CgSolver;
 import hachristopher.ols.network.utils.MathUtils;
 
 public class Layer {
@@ -13,19 +14,19 @@ public class Layer {
 
 	public double inputs[];
 	public double outputs[];
+	public CgSolver solvers[];
 
-	
-	public Layer (int inputSize, int numNeurons, Activation actFunc, boolean hasBias) {
+	public Layer(int inputSize, int numNeurons, Activation actFunc, boolean hasBias) {
 		super();
 		this.numNeurons = numNeurons;
 		this.actFunc = actFunc;
 		this.inputSize = inputSize;
 		this.hasBias = hasBias;
-		
+
 		if (hasBias) {
-			this.inputSize +=1;
+			this.inputSize += 1;
 		}
-		
+
 		initalize();
 	}
 
@@ -36,17 +37,29 @@ public class Layer {
 		this.inputs = new double[this.inputSize];
 		this.outputs = new double[this.numNeurons];
 		this.weights = new double[this.inputSize][this.numNeurons];
+		this.solvers = new CgSolver[this.numNeurons];
 		randomizeWeights();
-		if(hasBias) {
+		if (hasBias) {
 			resetBias();
 		}
+
+		initSolvers();
 	}
-	
+
+	/**
+	 * Initalize CgSolver for every neuron
+	 */
+	private void initSolvers() {
+		for (int neuron = 0; neuron < this.numNeurons; neuron++) {
+			this.solvers[neuron] = new CgSolver(this.inputSize);
+		}
+	}
+
 	/**
 	 * Reset the bias weights to 1
 	 */
 	private void resetBias() {
-		this.inputs[this.inputSize-1] = 1;
+		this.inputs[this.inputSize - 1] = 1;
 	}
 
 	/**
