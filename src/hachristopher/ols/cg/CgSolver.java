@@ -13,7 +13,7 @@ public class CgSolver {
 	// Residiuums
 	public double[] residuum;
 	public double[] residuumOld;
-	
+
 	public double[] p;
 
 	boolean haschanged;
@@ -28,13 +28,12 @@ public class CgSolver {
 		this.residuumOld = new double[this.size];
 		this.p = new double[this.size];
 		this.haschanged = false;
-		//randomInitX();
+		// randomInitX();
 	}
-	
-	
-	public void randomInitX(){
+
+	public void randomInitX() {
 		for (int n = 0; n < this.size; n++) {
-			this.x[n] = 0; 
+			this.x[n] = 0;
 		}
 	}
 
@@ -86,9 +85,7 @@ public class CgSolver {
 
 	}
 
-	public void initOptimization() {	
-		
-		System.out.println(A[0][1] + " und " + A[1][0]);
+	public void initOptimization() {
 		
 		calculateResiduum();
 
@@ -98,21 +95,20 @@ public class CgSolver {
 		}
 
 	}
-	
-	
+
 	public void optimize() {
-		
+
 		// calculate alpha
-		
+
 		double alpha = 0;
 		double rTr = 0;
 		double pTAp = 0;
-		
+
 		// rT * r
 		for (int n = 0; n < this.size; n++) {
 			rTr += this.residuum[n] * this.residuum[n];
 		}
-		
+
 		// pT * A * p
 		double[] Ap = new double[this.size];
 		for (int row = 0; row < this.size; row++) {
@@ -124,47 +120,43 @@ public class CgSolver {
 			pTAp += this.p[row] * Ap[row];
 		}
 
-		
 		// check for division by zero
-		if(pTAp != 0) {
-			alpha = rTr/pTAp;
-		}else {
-			alpha = rTr/0.00000000001;
+		if (pTAp != 0) {
+			alpha = rTr / pTAp;
+		} else {
+			alpha = rTr / 0.00000000001;
 		}
-		
+
 		// optimization step
 		for (int n = 0; n < this.size; n++) {
-			this.x[n] += alpha * this.p[n]; 
+			this.x[n] += alpha * this.p[n];
 		}
-		
+
 		// update residuum
 		for (int n = 0; n < this.size; n++) {
 			this.residuumOld[n] = this.residuum[n];
 			this.residuum[n] += alpha * Ap[n];
 		}
-		
-		
+
 		// calculate beta = rt * r/rOldT * rOld
 		double beta = 0;
-		
+
 		// rTr
 		for (int n = 0; n < this.size; n++) {
 			beta += this.residuum[n] * this.residuum[n];
 		}
-		
-		
-		if(rTr != 0) {
+
+		if (rTr != 0) {
 			beta /= rTr;
-		}else {
+		} else {
 			beta /= 0.00000000001;
 		}
-		
-		
+
 		// update p
 		for (int n = 0; n < this.size; n++) {
 			p[n] = -this.residuum[n] + beta * this.p[n];
 		}
-		
+
 	}
 
 }

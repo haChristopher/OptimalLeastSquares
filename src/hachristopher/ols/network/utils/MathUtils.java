@@ -2,6 +2,8 @@ package hachristopher.ols.network.utils;
 
 import org.apache.commons.math3.linear.MatrixUtils;
 
+import hachristopher.ols.network.Activation;
+
 public class MathUtils {
 
 	/**
@@ -29,7 +31,8 @@ public class MathUtils {
 	 * @param m1
 	 * @param m2
 	 * @return a*b
-	 * @throws Exception if sizes dont fit
+	 * @throws Exception
+	 *             if sizes dont fit
 	 */
 	public static double[][] multiply(double[][] m1, double[][] m2) throws Exception {
 		if (m1[0].length == m2.length) {
@@ -47,6 +50,22 @@ public class MathUtils {
 		} else {
 			throw new Exception("Wrong array sizes");
 		}
+	}
+
+	/**
+	 * @param matrix
+	 * @param a
+	 * @return matrix with invert function of a applied on all elements
+	 */
+	public static double[][] applyInvActivation(double[][] matrix, Activation a) {
+
+		for (int i = 0; i < matrix.length; i++) {
+			for (int j = 0; j < matrix[0].length; j++) {
+				matrix[i][j] = a.invert(matrix[i][j]);
+			}
+		}
+
+		return matrix;
 	}
 
 	/**
