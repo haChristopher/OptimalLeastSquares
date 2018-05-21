@@ -1,7 +1,7 @@
 package hachristopher.ols.network;
 
 public enum Activation {
-	SIGMOID, TANH, LEAKYRELU;
+	SIGMOID, TANH, TANH2, LEAKYRELU;
 
 	public double activate(double x) {
 		switch (this) {
@@ -9,6 +9,8 @@ public enum Activation {
 			return 1 / (1 + Math.exp(-x));
 		case TANH:
 			return Math.tanh(x);
+		case TANH2:
+			return 2 * Math.tanh(x);
 		case LEAKYRELU: {
 			if (x > 0) {
 				return x;
@@ -28,6 +30,8 @@ public enum Activation {
 			return -Math.log((1 / x) - 1);
 		case TANH:
 			return Math.log(2.0 / (1.0 - x) - 1.0) / 2.0;
+		case TANH2:
+			return Math.log(2.0 / (1.0 - x/2.0) - 1.0) / 2.0;
 		case LEAKYRELU: {
 			if (x > 0) {
 				return x;
@@ -57,6 +61,15 @@ public enum Activation {
 				x = 0.99;
 			} else if (x <= -1) {
 				x = -0.99;
+			}
+			return x;
+		}
+
+		case TANH2: {
+			if (x >= 2) {
+				x = 1.99;
+			} else if (x <= -2) {
+				x = -1.99;
 			}
 			return x;
 		}
