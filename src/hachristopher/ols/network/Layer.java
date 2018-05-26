@@ -5,6 +5,7 @@ import hachristopher.ols.network.utils.MathUtils;
 
 public class Layer {
 
+	private int id;
 	public int numNeurons;
 	public int inputSize;
 	public boolean hasBias;
@@ -18,12 +19,13 @@ public class Layer {
 
 	private double[][] target;
 
-	public Layer(int inputSize, int numNeurons, Activation actFunc, boolean hasBias) {
+	public Layer(int inputSize, int numNeurons, Activation actFunc, boolean hasBias, int id) {
 		super();
 		this.numNeurons = numNeurons;
 		this.actFunc = actFunc;
 		this.inputSize = inputSize;
 		this.hasBias = hasBias;
+		this.id = id;
 
 		if (hasBias) {
 			this.inputSize += 1;
@@ -70,7 +72,7 @@ public class Layer {
 	private void randomizeWeights() {
 		for (int i = 0; i < this.inputSize; i++) {
 			for (int j = 0; j < this.numNeurons; j++) {
-				this.weights[i][j] = MathUtils.randomBetween(-1, 1);
+				this.weights[i][j] = MathUtils.randomBetween(-0.5,0.5);
 			}
 		}
 	}
@@ -174,6 +176,10 @@ public class Layer {
 
 	public void setOutputs(double[] outputs) {
 		this.outputs = outputs;
+	};
+	
+	public int getId() {
+		return this.id;
 	};
 
 }
