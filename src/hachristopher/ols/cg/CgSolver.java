@@ -82,11 +82,10 @@ public class CgSolver {
 			// Ax - b
 			this.residuum[row] = Ax[row] - this.b[row];
 		}
-
 	}
 
 	public void initOptimization() {
-		
+
 		calculateResiduum();
 
 		// start first step in the direction of the residuum
@@ -94,6 +93,27 @@ public class CgSolver {
 			this.p[n] = -this.residuum[n];
 		}
 
+	}
+
+	/**
+	 * caluclates the error
+	 * 
+	 * @return error
+	 */
+	public double getError() {
+		double error = 0;
+		double[] Ax = new double[this.size];
+
+		// calculate A * x - b
+		for (int row = 0; row < this.size; row++) {
+			// A * x
+			for (int column = 0; column < this.size; column++) {
+				Ax[row] += this.A[row][column] * this.x[column];
+			}
+			// Ax - b
+			error += Math.pow(Ax[row] - this.b[row],2);
+		}
+		return error;
 	}
 
 	public void optimize() {
