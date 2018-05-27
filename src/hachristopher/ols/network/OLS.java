@@ -189,11 +189,19 @@ public class Ols {
 		for (int i = 0; i < outData.length; i++) {
 			innerSum = 0;
 			for (int j = 0; j < outData[i].length; j++) {
-				innerSum = outData[i][j] - results[i][j];
+				innerSum += Math.pow(outData[i][j] - results[i][j],2);
 			}
-			error += innerSum * innerSum;
+			error += innerSum;
 		}
-		return error/outData.length;
+		return error/(double)outData.length;
+	}
+	
+	/**
+	 * 
+	 * @return root mean squarred error
+	 */
+	public double getRMSE() {
+		return Math.sqrt(getMSE());
 	}
 
 	public double[][] getResults() {
