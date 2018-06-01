@@ -58,14 +58,14 @@ public class MathUtils {
 	 * @return matrix with invert function of a applied on all elements
 	 */
 	public static double[][] applyInvActivation(double[][] matrix, Activation a) {
-
+		double[][] result = new double[matrix.length][matrix[0].length];
 		for (int i = 0; i < matrix.length; i++) {
 			for (int j = 0; j < matrix[0].length; j++) {
-				matrix[i][j] = a.invert(a.border(matrix[i][j]));
+				result[i][j] = a.invert(a.border(matrix[i][j]));
 			}
 		}
 
-		return matrix;
+		return result;
 	}
 
 	/**
